@@ -1,6 +1,7 @@
 import random as rnd
 
 deck = [{"card":1,"number":4},{"card":2,"number":4},{"card":3,"number":4},{"card":4,"number":4},{"card":5,"number":4},{"card":6,"number":4},{"card":7,"number":4},{"card":8,"number":4},{"card":9,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4}]
+card = 0
 
 def earnings(money, bet, winner):   #Add the amount to what the player has earned so it can display the current money they have.
     if winner == "You":
@@ -14,13 +15,13 @@ def draw(deck): #draw a card from the deck and remove it from the deck
     if deck[i]["number"] == 0:
         draw(deck)
     else:
-        card = deck[i]["card"]
+        card = int(deck[i]["card"])
         deck[i]["number"] -= 1
-    return card
+        return card
 
 def add(hand, deck): #Add a card to the hand specificed
     card = draw(deck)
-    hand += card
+    hand += int(card)
     return hand
 
 def checkWinner(player, dealer): # see which of the players won the game.
