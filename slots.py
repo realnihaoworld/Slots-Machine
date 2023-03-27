@@ -22,7 +22,7 @@ def main():
 
     # print(playSlots())
 
-# assigns values to array
+# assigns values to arraycan
 def playSlots():
     slotIcons = [0] * 5
     for icons in range(len(slotIcons)):
