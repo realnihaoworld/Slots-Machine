@@ -1,8 +1,14 @@
 import random as rnd
 
 # emoji list
-symbols = ['🍎', '🍍', '🎰', '🐍', '⚜', '🎉', '💎', '🏆', '♥', '💰']
-
+symbols = ['🍎', '🍍', '🎰', '🎉', '💎']
+iconDict = {
+    (1, 2, 3, 4, 5, 6, 7, 8): '🍎',
+    (9, 10, 11, 12): '🍍',
+    (13): '🎰',
+    (14, 15, 16, 17, 18): '🎉',
+    (19, 20): '💎'
+}
 def main():
 
     # checks if bet amount is valid
@@ -20,13 +26,12 @@ def main():
 
     betType = input("Do you want a normal (n) or jackpot roll? (j) ")
 
-    # print(playSlots())
 
-# assigns values to arraycan
+# assigns values to a list to determine which icon
 def playSlots():
-    slotIcons = [0] * 5
+    slotIcons = [0] * 3
     for icons in range(len(slotIcons)):
-        slotIcons[icons] = rnd.randint(1, 20)
+        slotIcons[icons] = rnd.randint(1, 50)
 
     return slotIcons
 
