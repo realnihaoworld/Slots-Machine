@@ -1,7 +1,21 @@
 import random as rnd
 
-deck = [{"card":1,"number":4},{"card":2,"number":4},{"card":3,"number":4},{"card":4,"number":4},{"card":5,"number":4},{"card":6,"number":4},{"card":7,"number":4},{"card":8,"number":4},{"card":9,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4}]
+deck = [{"card": 1, "number": 4},
+        {"card": 2, "number": 4},
+        {"card": 3, "number": 4},
+        {"card": 4, "number": 4},
+        {"card": 5, "number": 4},
+        {"card": 6, "number": 4},
+        {"card": 7, "number": 4},
+        {"card": 8, "number": 4},
+        {"card": 9, "number": 4},
+        {"card": 10, "number": 4},
+        {"card": 10, "number": 4},
+        {"card": 10, "number": 4},
+        {"card": 10, "number": 4}]
+
 card = 0
+
 
 def earnings(money, bet, winner):   #Add the amount to what the player has earned so it can display the current money they have.
     if winner == "You":
@@ -12,12 +26,11 @@ def earnings(money, bet, winner):   #Add the amount to what the player has earne
 
 def draw(deck): #draw a card from the deck and remove it from the deck
     i = rnd.randint(0,12)
-    if deck[i]["number"] == 0:
-        draw(deck)
-    else:
-        card = int(deck[i]["card"])
-        deck[i]["number"] -= 1
-        return card
+    while deck[i]["number"] == 0:
+        i = rnd.randint(0, 12)
+    card = int(deck[i]["card"])
+    deck[i]["number"] -= 1
+    return card
 
 def add(hand, deck): #Add a card to the hand specificed
     card = draw(deck)
@@ -67,7 +80,7 @@ def play(playerHand, dealerHand): #actually play each hand
 def main():
     money = 50 #set baseline money
     print("You have a total of $" + str(money) + ".")
-    while money > 0 and money < 1000:   # continue to play while the player has between 0 and 1000 dollars
+    while 1000 > money > 0:   # continue to play while the player has between 0 and 1000 dollars
         deck = [{"card":1,"number":4},{"card":2,"number":4},{"card":3,"number":4},{"card":4,"number":4},{"card":5,"number":4},{"card":6,"number":4},{"card":7,"number":4},{"card":8,"number":4},{"card":9,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4}]  #the card deck resets each hand, as do the totals and the bet
         dealerHand = 0
         playerHand = 0
@@ -88,7 +101,7 @@ def main():
         money = earnings(money, bet, winner)    #determine the amount of money the player has and display winner.
         print(winner + " won. You have a total of $" + str(money) + ".")
 
-    if money > 1000:     #winning/losing conditions
+    if money > 1000 or money = 1000:     #winning/losing conditions
         print("You have won! Congratulations!")
     else:
         print("You have run out of money...")
