@@ -14,7 +14,7 @@ deck = [{"card": 1, "number": 4},
         {"card": 10, "number": 4},
         {"card": 10, "number": 4}]
 
-card = 0
+card = 0 #TODO: When you display total, see if you can display cards
 
 
 def earnings(money, bet, winner):   #Add the amount to what the player has earned so it can display the current money they have.
@@ -87,8 +87,9 @@ def main():
         bet = 1001
         print("---------------------------------------------------------------------")  #barrier between each hand (makes it easier to seperate the hands)
 
-        while bet > money or bet < 0:   #take bet that is viable
+        while bet > money or bet < 0:   #take bet that is viable TODO: TRY AND FIGURE OUT IF YOU CAN CHECK IF ITS ALPHA
             bet = int(input("How much do you want to bet? "))
+
         dealerHand = add(dealerHand, deck)    #deal the first two cards
         playerHand = add(playerHand, deck)
         dealerHand = add(dealerHand, deck)
@@ -101,7 +102,7 @@ def main():
         money = earnings(money, bet, winner)    #determine the amount of money the player has and display winner.
         print(winner + " won. You have a total of $" + str(money) + ".")
 
-    if money > 1000 or money = 1000:     #winning/losing conditions
+    if money >= 1000:     #winning/losing conditions
         print("You have won! Congratulations!")
     else:
         print("You have run out of money...")
