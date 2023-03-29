@@ -1,5 +1,4 @@
 import random as rnd
-
 deck = [{"card": 1, "number": 4},
         {"card": 2, "number": 4},
         {"card": 3, "number": 4},
@@ -16,7 +15,6 @@ deck = [{"card": 1, "number": 4},
 
 card = 0 #TODO: When you display total, see if you can display cards
 
-
 def earnings(money, bet, winner):   #Add the amount to what the player has earned so it can display the current money they have.
     if winner == "You":
         money += int(bet)
@@ -32,9 +30,16 @@ def draw(deck): #draw a card from the deck and remove it from the deck
     deck[i]["number"] -= 1
     return card
 
-def add(hand, deck): #Add a card to the hand specificed
+def addDealer(hand, deck, dealerDeck): #Add a card to the hand specificed
     card = draw(deck)
     hand += int(card)
+    dealerDeck.append(card)
+    return hand
+
+def addPlayer(hand, deck, playerDeck): #Add a card to the hand specificed
+    card = draw(deck)
+    hand += int(card)
+    playerDeck.append(card)
     return hand
 
 def checkWinner(player, dealer): # see which of the players won the game.
@@ -45,34 +50,34 @@ def checkWinner(player, dealer): # see which of the players won the game.
         winner = "The dealer"
         return winner
 
-def play(playerHand, dealerHand): #actually play each hand
+def play(playerHand, dealerHand, playerDeck, dealerDeck): #actually play each hand
     choice = "n"
     while playerHand < 21 and dealerHand < 21: #while one of the players hasn't won
         if dealerHand > playerHand: #if the players hand is less than the dealer, they have to play.
             print("Your hand is less than the dealers, Hit!")
-            playerHand = add(playerHand, deck)
+            playerHand = addPlayer(playerHand, deck, playerDeck)
 
-            print("Dealer Hand:" + str(dealerHand)) #print the totals
-            print("Player Hand:" + str(playerHand))
+            print("Dealer Hand:" + str(dealerDeck)) #print the totals
+            print("Player Hand:" + str(playerDeck))
         else: # give the player the choice to hit or stand
             while choice != "h" and choice != "s": #make sure that they have chosen one of the options
                 choice = input("Hit [h] or Stand [s]: ")
 
             if choice == "h": #if they choose to hit, add the card to the players hand and reset the choice.
                 print("Hit!")
-                playerHand = add(playerHand, deck)
+                playerHand = addPlayer(playerHand, deck, playerDeck)
                 choice = "n"
 
-                print("Dealer Hand:" + str(dealerHand)) #display totals
-                print("Player Hand:" + str(playerHand))
+                print("Dealer Hand:" + str(dealerDeck)) #display totals
+                print("Player Hand:" + str(playerDeck))
 
             elif choice == "s": #if they choose to stand, add a card to the dealers hand and reset choice
                 print("Stand!")
-                dealerHand = add(dealerHand, deck)
+                dealerHand = addDealer(dealerHand, deck, dealerDeck)
                 choice = "n"
 
-                print("Dealer Hand:" + str(dealerHand)) #display totals
-                print("Player Hand:" + str(playerHand))
+                print("Dealer Hand:" + str(dealerDeck)) #display totals
+                print("Player Hand:" + str(playerDeck))
 
     winner = checkWinner(playerHand, dealerHand) #determine the winner and return who they are
     return winner
@@ -82,23 +87,27 @@ def main():
     print("You have a total of $" + str(money) + ".")
     while 1000 > money > 0:   # continue to play while the player has between 0 and 1000 dollars
         deck = [{"card":1,"number":4},{"card":2,"number":4},{"card":3,"number":4},{"card":4,"number":4},{"card":5,"number":4},{"card":6,"number":4},{"card":7,"number":4},{"card":8,"number":4},{"card":9,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4},{"card":10,"number":4}]  #the card deck resets each hand, as do the totals and the bet
-        dealerHand = 0
-        playerHand = 0
+        dealerHand, playerHand, dealerDeck, playerDeck = 0, 0, [], []
         bet = 1001
         print("---------------------------------------------------------------------")  #barrier between each hand (makes it easier to seperate the hands)
 
-        while bet > money or bet < 0:   #take bet that is viable TODO: TRY AND FIGURE OUT IF YOU CAN CHECK IF ITS ALPHA
-            bet = int(input("How much do you want to bet? "))
+        while bet > money or bet < 0:   #take bet that is viable
+            bet = input("How much do you want to bet? ")
+            if bet.isalpha():
+                bet = 1001
+                continue
+            else:
+                bet = int(bet)
 
-        dealerHand = add(dealerHand, deck)    #deal the first two cards
-        playerHand = add(playerHand, deck)
-        dealerHand = add(dealerHand, deck)
-        playerHand = add(playerHand, deck)
+        dealerHand = addDealer(dealerHand, deck, dealerDeck) #deal the first two cards
+        playerHand = addPlayer(playerHand, deck, playerDeck)
+        dealerHand = addDealer(dealerHand, deck, dealerDeck)
+        playerHand = addPlayer(playerHand, deck, playerDeck)
 
-        print("Dealer Hand:" + str(dealerHand)) #display starting totals
-        print("Player Hand:" + str(playerHand))
+        print("Dealer Hand:" + str(dealerDeck)) #display starting totals
+        print("Player Hand:" + str(playerDeck))
 
-        winner = play(playerHand, dealerHand)   #play the game and determine a winner
+        winner = play(playerHand, dealerHand, playerDeck, dealerDeck)   #play the game and determine a winner
         money = earnings(money, bet, winner)    #determine the amount of money the player has and display winner.
         print(winner + " won. You have a total of $" + str(money) + ".")
 
