@@ -82,7 +82,7 @@ def play(playerHand, dealerHand, playerDeck, dealerDeck): #actually play each ha
     winner = checkWinner(playerHand, dealerHand) #determine the winner and return who they are
     return winner
 
-def main():
+def blackjack():
     money = 50 #set baseline money
     print("You have a total of $" + str(money) + ".")
     while 1000 > money > 0:   # continue to play while the player has between 0 and 1000 dollars
@@ -117,4 +117,4 @@ def main():
         print("You have run out of money...")
 
 if __name__ == "__main__":
-    main()
+    blackjack()
