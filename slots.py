@@ -9,7 +9,7 @@ iconDict = {
     19: '💎', 20: '💎'
 }
 
-def main():
+def slots():
 
     # checks if bet amount is valid
     #balance = int(input("How much do you want to add to your balance? "))
@@ -39,8 +39,8 @@ def main():
 
     win = False
     for x in range(len(symbols) - 1):
-        if symbols[x] = symbols[x+1]:
-            
+        if symbols[x] == symbols[x+1]:
+            print("die")
             #TODO: subtract from balance
         else:
             win = False
@@ -55,4 +55,4 @@ def playSlots():
 
 
 if __name__ == "__main__":
-    main()
+    slots()

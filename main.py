@@ -1,17 +1,16 @@
-import blackjack
-import slots
 def main():
     game = "n"
-    while game != "B" and "S":
+    while game != "B" and game!= "S":
         game = input("Do you want to play blackjack [B] or slots [S]? ")
 
     if game == "B":
-        blackjack.blackjack()
+        bj.blackjack()
     elif game == "S":
-        exec('slots')
+        s.slots()
 
 if __name__ == "__main__":
-    import blackjack
+    import blackjack as bj
+    import slots as s
     main()
 
 
