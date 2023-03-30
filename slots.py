@@ -1,4 +1,5 @@
 import random as rnd
+import time
 
 iconDict = {
     1: '🍎', 2: '🍎', 3: '🍎', 4: '🍎', 5: '🍎', 6: '🍎', 7: '🍎', 8: '🍎',
@@ -11,7 +12,8 @@ iconDict = {
 def main():
 
     # checks if bet amount is valid
-    balance = int(input("How much do you want to add to your balance? "))
+    #balance = int(input("How much do you want to add to your balance? "))
+    balance = 50
 
     # print statement describing game and different bets
     print("Welcome to my slot machine! Here, each roll is $0.50! Are you ready?")
@@ -32,8 +34,16 @@ def main():
         symbols.append(emoji)
 
     for x in symbols:
-        print(x)
+        print("[" + x + "]", end=" ")
+        time.sleep(1)
 
+    win = False
+    for x in range(len(symbols) - 1):
+        if symbols[x] = symbols[x+1]:
+            
+            #TODO: subtract from balance
+        else:
+            win = False
 # assigns values to a list to determine which icon
 
 def playSlots():
