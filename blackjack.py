@@ -13,7 +13,7 @@ deck = [{"card": 1, "number": 4},
         {"card": 10, "number": 4},
         {"card": 10, "number": 4}]
 
-card = 0 #TODO: When you display total, see if you can display cards
+card = 0
 
 def earnings(money, bet, winner):   #Add the amount to what the player has earned so it can display the current money they have.
     if winner == "You":
@@ -57,8 +57,8 @@ def play(playerHand, dealerHand, playerDeck, dealerDeck): #actually play each ha
             print("Your hand is less than the dealers, Hit!")
             playerHand = addPlayer(playerHand, deck, playerDeck)
 
-            print("Dealer Hand:" + str(dealerDeck)) #print the totals
-            print("Player Hand:" + str(playerDeck))
+            print("Dealer Hand:" + str(dealerDeck) + " Total:" + str(dealerHand))
+            print("Player Hand:" + str(playerDeck) + " Total:" + str(playerHand))
         else: # give the player the choice to hit or stand
             while choice != "h" and choice != "s": #make sure that they have chosen one of the options
                 choice = input("Hit [h] or Stand [s]: ")
@@ -68,16 +68,16 @@ def play(playerHand, dealerHand, playerDeck, dealerDeck): #actually play each ha
                 playerHand = addPlayer(playerHand, deck, playerDeck)
                 choice = "n"
 
-                print("Dealer Hand:" + str(dealerDeck)) #display totals
-                print("Player Hand:" + str(playerDeck))
+                print("Dealer Hand:" + str(dealerDeck) + " Total:" + str(dealerHand))
+                print("Player Hand:" + str(playerDeck) + " Total:" + str(playerHand))
 
             elif choice == "s": #if they choose to stand, add a card to the dealers hand and reset choice
                 print("Stand!")
                 dealerHand = addDealer(dealerHand, deck, dealerDeck)
                 choice = "n"
 
-                print("Dealer Hand:" + str(dealerDeck)) #display totals
-                print("Player Hand:" + str(playerDeck))
+                print("Dealer Hand:" + str(dealerDeck) + " Total:" + str(dealerHand))
+                print("Player Hand:" + str(playerDeck) + " Total:" + str(playerHand))
 
     winner = checkWinner(playerHand, dealerHand) #determine the winner and return who they are
     return winner
@@ -104,8 +104,8 @@ def main():
         dealerHand = addDealer(dealerHand, deck, dealerDeck)
         playerHand = addPlayer(playerHand, deck, playerDeck)
 
-        print("Dealer Hand:" + str(dealerDeck)) #display starting totals
-        print("Player Hand:" + str(playerDeck))
+        print("Dealer Hand:" + str(dealerDeck) + " Total:" + str(dealerHand)) #display starting totals
+        print("Player Hand:" + str(playerDeck) + " Total:" + str(playerHand))
 
         winner = play(playerHand, dealerHand, playerDeck, dealerDeck)   #play the game and determine a winner
         money = earnings(money, bet, winner)    #determine the amount of money the player has and display winner.
