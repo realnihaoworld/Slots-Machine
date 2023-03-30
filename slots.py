@@ -40,10 +40,15 @@ def slots():
     win = False
     for x in range(len(symbols) - 1):
         if symbols[x] == symbols[x+1]:
-            print("die")
-            #TODO: subtract from balance
+            win = True
+            continue
         else:
             win = False
+
+    if win:
+        print("You win!")
+    else:
+        print("You lose :(")
 # assigns values to a list to determine which icon
 
 def playSlots():
