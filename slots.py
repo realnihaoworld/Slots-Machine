@@ -26,7 +26,7 @@ def slots():
         amount = int(input(f"You can not exceed ${balance}. Enter different amount: "))
 
     # array for rng and icons
-    numbersList = playSlots()
+    numbersList = fillSlots()
     symbols = []
 
     for num in numbersList:
@@ -37,27 +37,37 @@ def slots():
         print("[" + x + "]", end=" ")
         time.sleep(1)
 
-    win = False
-    for x in range(len(symbols) - 1):
-        if symbols[x] == symbols[x+1]:
-            win = True
-            continue
-        else:
-            win = False
 
-    if win:
-        print("You win!")
-    else:
-        print("You lose :(")
+
 # assigns values to a list to determine which icon
 
-def playSlots():
+def fillSlots():
     slotIcons = [0] * 3
     for icons in range(len(slotIcons)):
         slotIcons[icons] = rnd.randint(1, 20)
 
     return slotIcons
 
+def checkWin(symbols):
+    win = False
+    for x in range(len(symbols) - 1):
+        if symbols[x] == symbols[x + 1]:
+            win = True
+            continue
+        else:
+            win = False
+            break
+
+    winIcon = ''
+    if win:
+        print('\n')
+        print("You win!")
+        winIcon = symbols[0]
+    else:
+        print('\n')
+        print("You lose :(")
+
+    print(winIcon)
 
 if __name__ == "__main__":
     slots()
